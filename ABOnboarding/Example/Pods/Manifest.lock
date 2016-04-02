@@ -1,0 +1,14 @@
+PODS:
+  - ABOnboarding (0.1.0)
+
+DEPENDENCIES:
+  - ABOnboarding (from `../`)
+
+EXTERNAL SOURCES:
+  ABOnboarding:
+    :path: ../
+
+SPEC CHECKSUMS:
+  ABOnboarding: 4efe093731e2c6aaedc50721ed8d73a4da01707b
+
+COCOAPODS: 0.39.0
