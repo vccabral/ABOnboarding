@@ -9,11 +9,11 @@
 import Foundation
 import UIKit
 
-struct ABOnboardingSettings {
-    static var OnboardingBackground = UIColor(rgba: "#f3ede5")
-    static var OnboardingNextButtonBackground = UIColor.whiteColor()
-    static var OnboardingText = UIColor(rgba: "#031514")
-    static var OnboardingLaterText = ABOnboardingSettings.OnboardingText.colorWithAlphaComponent(0.80)
-    static var BackgroundWhileOnboarding = UIColor.blackColor().colorWithAlphaComponent(0.85)
-    static var viewToShowOnboarding: UIView?
+public struct ABOnboardingSettings {
+    public static var OnboardingBackground = UIColor(rgba: "#f3ede5")
+    public static var OnboardingNextButtonBackground = UIColor.whiteColor()
+    public static var OnboardingText = UIColor(rgba: "#031514")
+    public static var OnboardingLaterText = ABOnboardingSettings.OnboardingText.colorWithAlphaComponent(0.80)
+    public static var BackgroundWhileOnboarding = UIColor.blackColor().colorWithAlphaComponent(0.85)
+    public static var viewToShowOnboarding: UIView?
 }
