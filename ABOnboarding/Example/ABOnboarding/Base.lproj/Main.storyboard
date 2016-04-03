@@ -16,8 +16,31 @@
                     <view key="view" contentMode="scaleToFill" id="kh9-bI-dsS">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9eK-Ng-ECJ">
+                                <rect key="frame" x="242" y="40" width="116" height="30"/>
+                                <state key="normal" title="Awesome Button"/>
+                                <connections>
+                                    <action selector="awesomeButtonAction:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="xFB-LG-a0e"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="r3I-bH-PTf">
+                                <rect key="frame" x="248" y="550" width="105" height="30"/>
+                                <state key="normal" title="Another Button"/>
+                            </button>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="r3I-bH-PTf" secondAttribute="bottom" constant="20" id="1mB-SX-rzm"/>
+                            <constraint firstItem="9eK-Ng-ECJ" firstAttribute="centerX" secondItem="kh9-bI-dsS" secondAttribute="centerX" id="5NZ-57-VHL"/>
+                            <constraint firstItem="r3I-bH-PTf" firstAttribute="centerX" secondItem="9eK-Ng-ECJ" secondAttribute="centerX" id="DaN-WX-YYF"/>
+                            <constraint firstItem="9eK-Ng-ECJ" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" constant="20" id="yuQ-zP-7GB"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="anotherButton" destination="r3I-bH-PTf" id="UtE-rA-skk"/>
+                        <outlet property="awesomeButton" destination="9eK-Ng-ECJ" id="OqZ-Mi-ihY"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
             </objects>

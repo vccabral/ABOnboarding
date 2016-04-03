@@ -47,29 +47,31 @@ public extension ShowsABOnboardingItem where Self: UIViewController {
      User hit next on the onboarding item, increment the counter and show that item
      */
     public func showNextOnboardingItem() {
-        if self.itemsToShow[self.onboardingIndex].nextItemAutomaticallyShows {
-            //If the next item should automatically show, show it
-            self.onboardingIndex += 1
-            
-            if self.onboardingIndex < self.itemsToShow.count {
-                //Onboarding is not done, show next item
-                self.removeOnboardingItem(self.itemsToShow[self.onboardingIndex - 1]) { () -> Void in
-                    
-                    self.showOnboardingItem(self.itemsToShow[self.onboardingIndex], firstItem: false, lastItem: (self.onboardingIndex >= self.itemsToShow.count - 1))
+        if self.onboardingIndex < self.itemsToShow.count {
+            if self.itemsToShow[self.onboardingIndex].nextItemAutomaticallyShows {
+                //If the next item should automatically show, show it
+                self.onboardingIndex += 1
+                
+                if self.onboardingIndex < self.itemsToShow.count {
+                    //Onboarding is not done, show next item
+                    self.removeOnboardingItem(self.itemsToShow[self.onboardingIndex - 1]) { () -> Void in
+                        
+                        self.showOnboardingItem(self.itemsToShow[self.onboardingIndex], firstItem: false, lastItem: (self.onboardingIndex >= self.itemsToShow.count - 1))
+                    }
+                } else {
+                    //Onboarding is done, complete onboarding
+                    self.removeOnboardingItem(self.itemsToShow[self.onboardingIndex - 1], onCompletion: nil)
+                    self.userCompletedOnboarding()
                 }
+                
             } else {
-                //Onboarding is done, complete onboarding
-                self.removeOnboardingItem(self.itemsToShow[self.onboardingIndex - 1], onCompletion: nil)
-                self.userCompletedOnboarding()
+                
+                //If the next item shouldn't show, set this bool to true so that the next time this method is called, the item shows
+                self.itemsToShow[self.onboardingIndex].nextItemAutomaticallyShows = true
+                
+                self.removeOnboardingItem(self.itemsToShow[self.onboardingIndex], onCompletion: nil)
+                
             }
-            
-        } else {
-            
-            //If the next item shouldn't show, set this bool to true so that the next time this method is called, the item shows
-            self.itemsToShow[self.onboardingIndex].nextItemAutomaticallyShows = true
-            
-            self.removeOnboardingItem(self.itemsToShow[self.onboardingIndex], onCompletion: nil)
-            
         }
     }
     
@@ -138,7 +140,7 @@ public extension ShowsABOnboardingItem where Self: UIViewController {
      - parameter above:    if the item is above the item it is point at, else below
      */
     private func showOnboardingItem(item: ABOnboardingItem, relativeToView view: UIView, isFirstItem firstItem: Bool, isLastItem lastItem: Bool, isAboveItem above: Bool) {
-        let globalWindowView = UIApplication.sharedApplication().keyWindow!
+        let globalWindowView = UIApplication.sharedApplication().windows[0]
         let itemFrame = view.frame
         let globalPointOrigin = view.superview!.convertPoint(itemFrame.origin, toView: globalWindowView)
         
@@ -157,7 +159,7 @@ public extension ShowsABOnboardingItem where Self: UIViewController {
      - parameter above:             whether or not this points up or down
      */
     private func showOnboardingItem(item: ABOnboardingItem, pointingAtOrigin globalPointOrigin: CGPoint, withItemFrame itemFrame: CGRect, isFirstItem firstItem: Bool, isLastItem lastItem: Bool, isAboveItem above: Bool) {
-        let globalWindowView = UIApplication.sharedApplication().keyWindow!
+        let globalWindowView = UIApplication.sharedApplication().windows[0]
         //If the background should be blurred
         
         let blurOpacity: CGFloat = item.blurredBackground ? 0.8 : 0
@@ -244,7 +246,7 @@ public extension ShowsABOnboardingItem where Self: UIViewController {
      - parameter lastItem:      if this item is the last item
      */
     private func showOnboardingItem(item: ABOnboardingItem, relativeToTop: CGFloat, isFirstItem firstItem: Bool, isLastItem lastItem: Bool) {
-        let globalWindowView = UIApplication.sharedApplication().keyWindow!
+        let globalWindowView = UIApplication.sharedApplication().windows[0]
         
         let blur = self.setUpBlurViewWithAlpha((item.blurredBackground ? 0.8 : 0), globalWindowView: globalWindowView)
         
@@ -270,7 +272,7 @@ public extension ShowsABOnboardingItem where Self: UIViewController {
      - parameter lastItem:          if this item is the last item
      */
     private func showOnboardingItem(item: ABOnboardingItem, relativeToBottom: CGFloat, isFirstItem firstItem: Bool, isLastItem lastItem: Bool) {
-        let globalWindowView = UIApplication.sharedApplication().keyWindow!
+        let globalWindowView = UIApplication.sharedApplication().windows[0]
         
         let blur = self.setUpBlurViewWithAlpha((item.blurredBackground ? 0.8 : 0), globalWindowView: globalWindowView)
         
@@ -310,11 +312,11 @@ public extension ShowsABOnboardingItem where Self: UIViewController {
         globalWindowView.addSubview(onboardingView)
         
         //Adding the selectors to the next and skip buttons
-        onboardingView.nextButton.addAction(forControlEvents: .TouchUpInside) {
-            self.showNextOnboardingItem()
-        }
         onboardingView.laterButton.addAction(forControlEvents: .TouchUpInside) {
             self.skipOnboarding()
+        }
+        onboardingView.nextButton.addAction(forControlEvents: .TouchUpInside) {
+            self.showNextOnboardingItem()
         }
         
         //0px from left, right, height determined by item's potion. It starts 100px over for animation
@@ -414,7 +416,7 @@ public extension ShowsABOnboardingItem where Self: UIViewController {
      - parameter section: section of onboarding to set "later" to
      */
     public func userSkippedOnboarding() {
-//        debugPrint("Completing onboarding")
+//        debugPrint("Skipped onboarding")
 //        let user = CurrentState.sharedInstance.currentUser
 //        ApiManager.sharedInstance.saveSectionOfOnboarding(self.onboardingSection, newStatus: .Later, id: user.id) { (_, error) -> Void in
 //            if error == nil {

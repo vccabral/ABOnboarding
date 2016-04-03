@@ -138,11 +138,11 @@
 		629FAFC723B572E8B39B62C2CB6458F7 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				6616043E1CB0A0BD00F32E68 /* ABOnboardingSettings.swift */,
 				661604341CB09DA300F32E68 /* ABOnboardingItem.swift */,
 				661604361CB09DEC00F32E68 /* ABOnboardingView.swift */,
-				661604381CB09E2C00F32E68 /* TriangleView.swift */,
 				6616043A1CB09E6000F32E68 /* ShowsABOnboardingItem.swift */,
-				6616043E1CB0A0BD00F32E68 /* ABOnboardingSettings.swift */,
+				661604381CB09E2C00F32E68 /* TriangleView.swift */,
 				6616043C1CB09F3C00F32E68 /* UIButton+AddAction.swift */,
 				661604401CB0A0EF00F32E68 /* UIColor+Hex.swift */,
 			);
