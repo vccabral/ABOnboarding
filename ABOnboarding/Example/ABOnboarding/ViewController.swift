@@ -48,6 +48,14 @@ class ViewController: UIViewController, ShowsABOnboardingItem {
     
     // MARK: - ShowsABOnboardingItem
     
+    func userSkippedOnboarding() {
+        print("User hit the skip onboarding button, save the status in this method")
+    }
+    
+    func userCompletedOnboarding() {
+        print("User completed all the onboarding, save the status in this method")
+    }
+    
     /**
      If pod ABOnboarding should be showing items on this view controller
      

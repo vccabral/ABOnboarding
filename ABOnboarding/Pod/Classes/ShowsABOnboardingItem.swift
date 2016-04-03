@@ -19,10 +19,10 @@ public protocol ShowsABOnboardingItem: class {
     func startOnboarding() //Function should be called in viewDidLoad
     func skipOnboarding()
     func showNextOnboardingItem()
-    func userSkippedOnboarding()
-    func userCompletedOnboarding()
     
     //Must be implemented
+    func userSkippedOnboarding()
+    func userCompletedOnboarding()
     func shouldShowOnboardingOnThisVC() -> Bool
 }
 
@@ -354,95 +354,6 @@ public extension ShowsABOnboardingItem where Self: UIViewController {
         }
         
         return onboardingView
-    }
-    
-    /**
-     Completes the onboarding for provided section
-     
-     - parameter section: section of onboarding to complete
-     */
-    public func userCompletedOnboarding() {
-//        debugPrint("Onboarding done!")
-//        let user = CurrentState.sharedInstance.currentUser
-//        LoadingView.present()
-//        ApiManager.sharedInstance.saveSectionOfOnboarding(self.onboardingSection, newStatus: .Completed, id: user.id) { (_, error) -> Void in
-//            if error == nil {
-//                
-//                //No error, set status and grant rewards
-//                switch self.onboardingSection {
-//                case .Browse:
-//                    CurrentState.sharedInstance.currentUser.onboardingBrowseStatus = OnboardingStatus.Completed.rawValue
-//                case .Discover:
-//                    CurrentState.sharedInstance.currentUser.onboardingDiscoverStatus = OnboardingStatus.Completed.rawValue
-//                case .AddProduct:
-//                    CurrentState.sharedInstance.currentUser.onboardingAddProductStatus = OnboardingStatus.Completed.rawValue
-//                case .Rewards:
-//                    CurrentState.sharedInstance.currentUser.onboardingRewardsStatus = OnboardingStatus.Completed.rawValue
-//                case .Profile:
-//                    CurrentState.sharedInstance.currentUser.onboardingProfileStatus = OnboardingStatus.Completed.rawValue
-//                }
-//                
-//                ApiManager.sharedInstance.grantUserRewards(user.id, reason: self.onboardingSection) { (newUser, error) -> Void in
-//                    if error == nil {
-//                        
-//                        user.totalRewardsCents = newUser!.availableRewardsCents
-//                        user.availableRewardsCents = newUser!.availableRewardsCents
-//                        
-//                        //Wait until the last onboarding view is off screen
-//                        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64(0.5 * Double(NSEC_PER_SEC))), dispatch_get_main_queue()) {
-//                            //Show user success message
-//                            SVProgressHUD.showSuccessWithStatus("Congratulations! You just got 100 rewards points!")
-//                        }
-//                    } else {
-//                        //Show error
-//                        self.showAlertWithTitle("Error", message: Constants.ErrorMessages.Rewards)
-//                    }
-//                    
-//                    LoadingView.hide()
-//                }
-//                
-//            } else {
-//                //Show errors
-//                self.showAlertWithTitle("Error", message: Constants.ErrorMessages.Onboarding)
-//            }
-//            
-//            LoadingView.hide()
-//        }
-    }
-    
-    /**
-     Records that the user skipped this section of onboarding to the API
-     
-     - parameter section: section of onboarding to set "later" to
-     */
-    public func userSkippedOnboarding() {
-//        debugPrint("Skipped onboarding")
-//        let user = CurrentState.sharedInstance.currentUser
-//        ApiManager.sharedInstance.saveSectionOfOnboarding(self.onboardingSection, newStatus: .Later, id: user.id) { (_, error) -> Void in
-//            if error == nil {
-//                
-//                //Show message and save status
-//                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64(0.5 * Double(NSEC_PER_SEC))), dispatch_get_main_queue()) {
-//                    //Show message and save status
-//                    SVProgressHUD.showSuccessWithStatus("Got it. You can always complete onboarding later by tapping on the settings gear on the profile page.")
-//                }
-//                switch self.onboardingSection {
-//                case .Browse:
-//                    CurrentState.sharedInstance.currentUser.onboardingBrowseStatus = OnboardingStatus.Later.rawValue
-//                case .Discover:
-//                    CurrentState.sharedInstance.currentUser.onboardingDiscoverStatus = OnboardingStatus.Later.rawValue
-//                case .AddProduct:
-//                    CurrentState.sharedInstance.currentUser.onboardingAddProductStatus = OnboardingStatus.Later.rawValue
-//                case .Rewards:
-//                    CurrentState.sharedInstance.currentUser.onboardingRewardsStatus = OnboardingStatus.Later.rawValue
-//                case .Profile:
-//                    CurrentState.sharedInstance.currentUser.onboardingProfileStatus = OnboardingStatus.Later.rawValue
-//                }
-//                
-//            } else {
-//                self.showAlertWithTitle("Error", message: Constants.ErrorMessages.Onboarding)
-//            }
-//        }
     }
     
     /**
