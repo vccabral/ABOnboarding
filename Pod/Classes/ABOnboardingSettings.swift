@@ -15,4 +15,5 @@ struct ABOnboardingSettings {
     static var OnboardingText = UIColor(rgba: "#031514")
     static var OnboardingLaterText = ABOnboardingSettings.OnboardingText.colorWithAlphaComponent(0.80)
     static var BackgroundWhileOnboarding = UIColor.blackColor().colorWithAlphaComponent(0.85)
+    static var viewToShowOnboarding: UIView?
 }

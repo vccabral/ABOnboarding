@@ -140,7 +140,13 @@ public extension ShowsABOnboardingItem where Self: UIViewController {
      - parameter above:    if the item is above the item it is point at, else below
      */
     private func showOnboardingItem(item: ABOnboardingItem, relativeToView view: UIView, isFirstItem firstItem: Bool, isLastItem lastItem: Bool, isAboveItem above: Bool) {
-        let globalWindowView = UIApplication.sharedApplication().windows[0]
+        var globalWindowView: UIView!
+        if let view = ABOnboardingSettings.viewToShowOnboarding {
+            globalWindowView = view
+        } else {
+            globalWindowView = self.view
+        }
+        
         let itemFrame = view.frame
         let globalPointOrigin = view.superview!.convertPoint(itemFrame.origin, toView: globalWindowView)
         
@@ -159,8 +165,12 @@ public extension ShowsABOnboardingItem where Self: UIViewController {
      - parameter above:             whether or not this points up or down
      */
     private func showOnboardingItem(item: ABOnboardingItem, pointingAtOrigin globalPointOrigin: CGPoint, withItemFrame itemFrame: CGRect, isFirstItem firstItem: Bool, isLastItem lastItem: Bool, isAboveItem above: Bool) {
-        let globalWindowView = UIApplication.sharedApplication().windows[0]
-        //If the background should be blurred
+        var globalWindowView: UIView!
+        if let view = ABOnboardingSettings.viewToShowOnboarding {
+            globalWindowView = view
+        } else {
+            globalWindowView = self.view
+        }
         
         let blurOpacity: CGFloat = item.blurredBackground ? 0.8 : 0
         //Setting up top blur
@@ -246,7 +256,12 @@ public extension ShowsABOnboardingItem where Self: UIViewController {
      - parameter lastItem:      if this item is the last item
      */
     private func showOnboardingItem(item: ABOnboardingItem, relativeToTop: CGFloat, isFirstItem firstItem: Bool, isLastItem lastItem: Bool) {
-        let globalWindowView = UIApplication.sharedApplication().windows[0]
+        var globalWindowView: UIView!
+        if let view = ABOnboardingSettings.viewToShowOnboarding {
+            globalWindowView = view
+        } else {
+            globalWindowView = self.view
+        }
         
         let blur = self.setUpBlurViewWithAlpha((item.blurredBackground ? 0.8 : 0), globalWindowView: globalWindowView)
         
@@ -272,7 +287,12 @@ public extension ShowsABOnboardingItem where Self: UIViewController {
      - parameter lastItem:          if this item is the last item
      */
     private func showOnboardingItem(item: ABOnboardingItem, relativeToBottom: CGFloat, isFirstItem firstItem: Bool, isLastItem lastItem: Bool) {
-        let globalWindowView = UIApplication.sharedApplication().windows[0]
+        var globalWindowView: UIView!
+        if let view = ABOnboardingSettings.viewToShowOnboarding {
+            globalWindowView = view
+        } else {
+            globalWindowView = self.view
+        }
         
         let blur = self.setUpBlurViewWithAlpha((item.blurredBackground ? 0.8 : 0), globalWindowView: globalWindowView)
         
