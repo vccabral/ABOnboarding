@@ -23,6 +23,7 @@ class ViewController: UIViewController, ShowsABOnboardingItem {
         super.viewDidLoad()
         
         if self.shouldShowOnboardingOnThisVC() {
+            //Note: if you get an error about constraints here, the onboarding is being shown before the window is ready.
             let delayTime = dispatch_time(DISPATCH_TIME_NOW, Int64(1 * Double(NSEC_PER_SEC)))
             dispatch_after(delayTime, dispatch_get_main_queue()) {
                 self.itemsToShow = [
