@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = "ABOnboarding"
-  s.version          = "0.1.1"
+  s.version          = "0.1.2"
   s.summary          = "The easiest way to onboard users in your iOS app"
   s.homepage         = "https://github.com/MrAdamBoyd/ABOnboarding"
   s.license          = 'MIT'
