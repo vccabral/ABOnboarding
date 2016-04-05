@@ -22,18 +22,19 @@ class ViewController: UIViewController, ShowsABOnboardingItem {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if self.shouldShowOnboardingOnThisVC() {
+        if self.shouldShowOnboardingOnThisVC() && self.itemsToShow.count == 0 {
+            self.itemsToShow = [
+                ABOnboardingItem(message: "This is pointing at a pretty awesome button", placement: .Below(self.awesomeButton), blurredBackground: true),
+                ABOnboardingItem(message: "This is another button, but this time below", placement: .Above(self.anotherButton), blurredBackground: true),
+                ABOnboardingItem(message: "It doesn't have to point at anything!", placement: .RelativeToTop(100), blurredBackground: true),
+                ABOnboardingItem(message: "It doesn't have to have a blurred background", placement: .RelativeToTop(100), blurredBackground: false),
+                ABOnboardingItem(message: "You can delay the next item showing until a user completes an action (press the awesome button)", placement: .RelativeToTop(100), blurredBackground: true, nextItemAutomaticallyShows: false),
+                ABOnboardingItem(message: "This one is delayed. That's pretty cool right?", placement: .Below(self.awesomeButton), blurredBackground: true)
+            ]
+            
             //Note: if you get an error about constraints here, the onboarding is being shown before the window is ready.
             let delayTime = dispatch_time(DISPATCH_TIME_NOW, Int64(1 * Double(NSEC_PER_SEC)))
             dispatch_after(delayTime, dispatch_get_main_queue()) {
-                self.itemsToShow = [
-                    ABOnboardingItem(message: "This is pointing at a pretty awesome button", placement: .Below(self.awesomeButton), blurredBackground: true),
-                    ABOnboardingItem(message: "This is another button, but this time below", placement: .Above(self.anotherButton), blurredBackground: true),
-                    ABOnboardingItem(message: "It doesn't have to point at anything!", placement: .RelativeToTop(100), blurredBackground: true),
-                    ABOnboardingItem(message: "It doesn't have to have a blurred background", placement: .RelativeToTop(100), blurredBackground: false),
-                    ABOnboardingItem(message: "You can delay the next item showing until a user completes an action (press the awesome button)", placement: .RelativeToTop(100), blurredBackground: true, nextItemAutomaticallyShows: false),
-                    ABOnboardingItem(message: "This one is delayed. That's pretty cool right?", placement: .Below(self.awesomeButton), blurredBackground: true)
-                ]
                 
                 self.startOnboarding()
             }
