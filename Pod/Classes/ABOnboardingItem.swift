@@ -16,20 +16,36 @@ public enum RelativePlacement {
 @objc public class ABOnboardingItem: NSObject {
     var message: String
     var placement: RelativePlacement
-    var onboardingView: ABOnboardingView!
+    var onboardingView: ABOnboardingView! {
+        didSet {
+            if let leftTitle = self.leftButtonTitle {
+                self.onboardingView.laterButton.setTitle(leftTitle, forState: .Normal)
+            }
+            
+            if let rightTitle = self.rightButtonTitle {
+                self.onboardingView.nextButton.setTitle(rightTitle, forState: .Normal)
+            }
+        }
+    }
     var blurredBackground: Bool
     var nextItemAutomaticallyShows: Bool = true
+    var leftButtonTitle: String?
+    var rightButtonTitle: String?
     
-    public init(message: String, placement: RelativePlacement, blurredBackground: Bool) {
+    public init(message: String, placement: RelativePlacement, blurredBackground: Bool, leftButtonTitle: String? = nil, rightButtonTitle: String? = nil) {
         self.message = message
         self.placement = placement
         self.blurredBackground = blurredBackground
+        self.leftButtonTitle = leftButtonTitle
+        self.rightButtonTitle = rightButtonTitle
     }
     
-    public init(message: String, placement: RelativePlacement, blurredBackground: Bool, nextItemAutomaticallyShows: Bool) {
+    public init(message: String, placement: RelativePlacement, blurredBackground: Bool, nextItemAutomaticallyShows: Bool, leftButtonTitle: String? = nil, rightButtonTitle: String? = nil) {
         self.message = message
         self.placement = placement
         self.blurredBackground = blurredBackground
         self.nextItemAutomaticallyShows = nextItemAutomaticallyShows
+        self.leftButtonTitle = leftButtonTitle
+        self.rightButtonTitle = rightButtonTitle
     }
 }

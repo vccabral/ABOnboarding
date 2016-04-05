@@ -14,6 +14,7 @@ import UIKit
     var onboardingIndex: Int { get set }
     var currentBlurViews: [UIView] { get set }
     var onboardingSection: Int { get set }
+    optional var showInVCInsteadOfWindow: Bool { get set }
     
     //Action forwarders
     func skipOnboardingForwarder()
@@ -139,12 +140,7 @@ public extension ShowsABOnboardingItem where Self: UIViewController {
      - parameter above:    if the item is above the item it is point at, else below
      */
     private func showOnboardingItem(item: ABOnboardingItem, relativeToView view: UIView, isFirstItem firstItem: Bool, isLastItem lastItem: Bool, isAboveItem above: Bool) {
-        var globalWindowView: UIView!
-        if let view = ABOnboardingSettings.viewToShowOnboarding {
-            globalWindowView = view
-        } else {
-            globalWindowView = self.view
-        }
+        let globalWindowView = self.getViewToAddOnboarding()
         
         let itemFrame = view.frame
         let globalPointOrigin = view.superview!.convertPoint(itemFrame.origin, toView: globalWindowView)
@@ -164,12 +160,7 @@ public extension ShowsABOnboardingItem where Self: UIViewController {
      - parameter above:             whether or not this points up or down
      */
     private func showOnboardingItem(item: ABOnboardingItem, pointingAtOrigin globalPointOrigin: CGPoint, withItemFrame itemFrame: CGRect, isFirstItem firstItem: Bool, isLastItem lastItem: Bool, isAboveItem above: Bool) {
-        var globalWindowView: UIView!
-        if let view = ABOnboardingSettings.viewToShowOnboarding {
-            globalWindowView = view
-        } else {
-            globalWindowView = self.view
-        }
+        let globalWindowView = self.getViewToAddOnboarding()
         
         let blurOpacity: CGFloat = item.blurredBackground ? 0.8 : 0
         //Setting up top blur
@@ -255,12 +246,7 @@ public extension ShowsABOnboardingItem where Self: UIViewController {
      - parameter lastItem:      if this item is the last item
      */
     private func showOnboardingItem(item: ABOnboardingItem, relativeToTop: CGFloat, isFirstItem firstItem: Bool, isLastItem lastItem: Bool) {
-        var globalWindowView: UIView!
-        if let view = ABOnboardingSettings.viewToShowOnboarding {
-            globalWindowView = view
-        } else {
-            globalWindowView = self.view
-        }
+        let globalWindowView = self.getViewToAddOnboarding()
         
         let blur = self.setUpBlurViewWithAlpha((item.blurredBackground ? 0.8 : 0), globalWindowView: globalWindowView)
         
@@ -286,12 +272,7 @@ public extension ShowsABOnboardingItem where Self: UIViewController {
      - parameter lastItem:          if this item is the last item
      */
     private func showOnboardingItem(item: ABOnboardingItem, relativeToBottom: CGFloat, isFirstItem firstItem: Bool, isLastItem lastItem: Bool) {
-        var globalWindowView: UIView!
-        if let view = ABOnboardingSettings.viewToShowOnboarding {
-            globalWindowView = view
-        } else {
-            globalWindowView = self.view
-        }
+        let globalWindowView = self.getViewToAddOnboarding()
         
         let blur = self.setUpBlurViewWithAlpha((item.blurredBackground ? 0.8 : 0), globalWindowView: globalWindowView)
         
@@ -402,5 +383,24 @@ public extension ShowsABOnboardingItem where Self: UIViewController {
         blur.backgroundColor = UIColor.blackColor().colorWithAlphaComponent(alpha)
         
         return blur
+    }
+    
+    /**
+     Gets the view that the onboarding should be added to
+     
+     - returns: the current vc's view or the specified view in the settings
+     */
+    private func getViewToAddOnboarding() -> UIView {
+        if let showInVCOverride = self.showInVCInsteadOfWindow {
+            if showInVCOverride {
+                return self.view
+            }
+        }
+        
+        if let view = ABOnboardingSettings.viewToShowOnboarding {
+            return view
+        } else {
+            return self.view
+        }
     }
 }

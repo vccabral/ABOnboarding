@@ -13,7 +13,7 @@ public class ABOnboardingView: UIView {
     
     var textLabel = UILabel()
     var buttonContainer = UIView()
-    var nextButton = UIButton()
+    var nextButton = FilledRoundedButton()
     var laterButton = UIButton()
     var triangleView = TriangleView()
     
@@ -78,12 +78,7 @@ public class ABOnboardingView: UIView {
         //Setting up the next button
         self.nextButton.translatesAutoresizingMaskIntoConstraints = false
         self.nextButton.setTitle((lastItem ? "Done" : "Next"), forState: .Normal)
-        self.nextButton.setTitleColor(ABOnboardingSettings.OnboardingText, forState: .Normal)
         self.nextButton.titleLabel?.font = UIFont(name: "Avenir-Light", size: 16)!
-        self.nextButton.layer.borderColor = ABOnboardingSettings.OnboardingText.CGColor
-        self.nextButton.backgroundColor = ABOnboardingSettings.OnboardingNextButtonBackground
-        self.nextButton.layer.borderWidth = 1
-        self.nextButton.layer.cornerRadius = 20
         self.buttonContainer.addSubview(self.nextButton)
         
         //0px right from center x, 0px from top, right, bottom
@@ -96,7 +91,6 @@ public class ABOnboardingView: UIView {
         } else {
             self.buttonContainer.addConstraint(NSLayoutConstraint(item: self.nextButton, attribute: .Left, relatedBy: .Equal, toItem: self.buttonContainer, attribute: .CenterX, multiplier: 1, constant: 10))
         }
-        
         
         //Setting up the later button
         self.laterButton.setTitle(firstItem ? "Maybe Later" : "Skip", forState: .Normal)

@@ -15,9 +15,9 @@
 		661604371CB09DEC00F32E68 /* ABOnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 661604361CB09DEC00F32E68 /* ABOnboardingView.swift */; };
 		661604391CB09E2C00F32E68 /* TriangleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 661604381CB09E2C00F32E68 /* TriangleView.swift */; };
 		6616043B1CB09E6000F32E68 /* ShowsABOnboardingItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6616043A1CB09E6000F32E68 /* ShowsABOnboardingItem.swift */; };
-		6616043D1CB09F3C00F32E68 /* UIButton+AddAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6616043C1CB09F3C00F32E68 /* UIButton+AddAction.swift */; };
 		6616043F1CB0A0BD00F32E68 /* ABOnboardingSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6616043E1CB0A0BD00F32E68 /* ABOnboardingSettings.swift */; };
 		661604411CB0A0EF00F32E68 /* UIColor+Hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 661604401CB0A0EF00F32E68 /* UIColor+Hex.swift */; };
+		66951FF01CB4853800D52774 /* RoundedFilledButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66951FEF1CB4853800D52774 /* RoundedFilledButton.swift */; };
 		70FF5142C1785CCF55AA64CBB20B0D79 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E4E89230EF59BC255123B67864ACF77 /* Foundation.framework */; };
 		7BDC9249817B21C3EEE34F25FDF42E9B /* ABOnboarding-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = D3026A5C39616C8FD82D31C299766358 /* ABOnboarding-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		893E92F63B6D0856178BB3F4021A373E /* Pods-ABOnboarding_Tests-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 3082809A55226B262BC4D6DB9A1FBBFC /* Pods-ABOnboarding_Tests-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -66,9 +66,9 @@
 		661604361CB09DEC00F32E68 /* ABOnboardingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ABOnboardingView.swift; sourceTree = "<group>"; };
 		661604381CB09E2C00F32E68 /* TriangleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TriangleView.swift; sourceTree = "<group>"; };
 		6616043A1CB09E6000F32E68 /* ShowsABOnboardingItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShowsABOnboardingItem.swift; sourceTree = "<group>"; };
-		6616043C1CB09F3C00F32E68 /* UIButton+AddAction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIButton+AddAction.swift"; sourceTree = "<group>"; };
 		6616043E1CB0A0BD00F32E68 /* ABOnboardingSettings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ABOnboardingSettings.swift; sourceTree = "<group>"; };
 		661604401CB0A0EF00F32E68 /* UIColor+Hex.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Hex.swift"; sourceTree = "<group>"; };
+		66951FEF1CB4853800D52774 /* RoundedFilledButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoundedFilledButton.swift; sourceTree = "<group>"; };
 		6F312565BE0F0C64085A89F954883D75 /* Pods-ABOnboarding_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-ABOnboarding_Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		705F9D9B19A4B320CE2450959F9168A4 /* Pods-ABOnboarding_Example.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = "Pods-ABOnboarding_Example.modulemap"; sourceTree = "<group>"; };
 		73F66BAE4855A1F9F5347BDA86A06B81 /* Pods-ABOnboarding_Tests.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = "Pods-ABOnboarding_Tests.modulemap"; sourceTree = "<group>"; };
@@ -142,8 +142,8 @@
 				661604341CB09DA300F32E68 /* ABOnboardingItem.swift */,
 				661604361CB09DEC00F32E68 /* ABOnboardingView.swift */,
 				6616043A1CB09E6000F32E68 /* ShowsABOnboardingItem.swift */,
+				66951FEF1CB4853800D52774 /* RoundedFilledButton.swift */,
 				661604381CB09E2C00F32E68 /* TriangleView.swift */,
-				6616043C1CB09F3C00F32E68 /* UIButton+AddAction.swift */,
 				661604401CB0A0EF00F32E68 /* UIColor+Hex.swift */,
 			);
 			path = Classes;
@@ -435,13 +435,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				6616043F1CB0A0BD00F32E68 /* ABOnboardingSettings.swift in Sources */,
+				66951FF01CB4853800D52774 /* RoundedFilledButton.swift in Sources */,
 				661604411CB0A0EF00F32E68 /* UIColor+Hex.swift in Sources */,
 				661604371CB09DEC00F32E68 /* ABOnboardingView.swift in Sources */,
 				0E5D87A4FE7C43D255037607F5273D88 /* ABOnboarding-dummy.m in Sources */,
 				6616043B1CB09E6000F32E68 /* ShowsABOnboardingItem.swift in Sources */,
 				661604391CB09E2C00F32E68 /* TriangleView.swift in Sources */,
 				661604351CB09DA300F32E68 /* ABOnboardingItem.swift in Sources */,
-				6616043D1CB09F3C00F32E68 /* UIButton+AddAction.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
