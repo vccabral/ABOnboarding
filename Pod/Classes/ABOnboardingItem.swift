@@ -13,7 +13,7 @@ public enum RelativePlacement {
     case Above(UIView), Below(UIView), RelativeToTop(CGFloat), RelativeToBottom(CGFloat), PointingUpAt(CGRect), PointingDownAt(CGRect)
 }
 
-public class ABOnboardingItem {
+@objc public class ABOnboardingItem: NSObject {
     var message: String
     var placement: RelativePlacement
     var onboardingView: ABOnboardingView!

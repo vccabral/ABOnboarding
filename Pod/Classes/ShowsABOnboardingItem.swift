@@ -9,16 +9,15 @@
 import Foundation
 import UIKit
 
-public protocol ShowsABOnboardingItem: class {
+@objc public protocol ShowsABOnboardingItem {
     var itemsToShow: [ABOnboardingItem] { get set }
     var onboardingIndex: Int { get set }
     var currentBlurViews: [UIView] { get set }
     var onboardingSection: Int { get set }
     
-    //Already implemented
-    func startOnboarding() //Function should be called in viewDidLoad
-    func skipOnboarding()
-    func showNextOnboardingItem()
+    //Action forwarders
+    func skipOnboardingForwarder()
+    func showNextOnboardingItemForwarder()
     
     //Must be implemented
     func userSkippedOnboarding()
@@ -332,12 +331,8 @@ public extension ShowsABOnboardingItem where Self: UIViewController {
         globalWindowView.addSubview(onboardingView)
         
         //Adding the selectors to the next and skip buttons
-        onboardingView.laterButton.addAction(forControlEvents: .TouchUpInside) {
-            self.skipOnboarding()
-        }
-        onboardingView.nextButton.addAction(forControlEvents: .TouchUpInside) {
-            self.showNextOnboardingItem()
-        }
+        onboardingView.laterButton.addTarget(self, action: #selector(self.skipOnboardingForwarder), forControlEvents: .TouchUpInside)
+        onboardingView.nextButton.addTarget(self, action: #selector(self.showNextOnboardingItemForwarder), forControlEvents: .TouchUpInside)
         
         //0px from left, right, height determined by item's potion. It starts 100px over for animation
         onboardingView.leftConstraint = NSLayoutConstraint(item: onboardingView, attribute: .Left, relatedBy: .Equal, toItem: globalWindowView, attribute: .Left, multiplier: 1, constant: UIScreen.mainScreen().bounds.width)

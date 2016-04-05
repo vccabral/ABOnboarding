@@ -64,6 +64,14 @@ class ViewController: UIViewController, ShowsABOnboardingItem {
     func shouldShowOnboardingOnThisVC() -> Bool {
         return true
     }
+    
+    func skipOnboardingForwarder() {
+        self.skipOnboarding()
+    }
+    
+    func showNextOnboardingItemForwarder() {
+        self.showNextOnboardingItemForwarder()
+    }
 
 }
 
