@@ -11,17 +11,23 @@ An easy to use library built for the first time user experience of your iOS app.
 - [Credits](#credits)
 
 #Screenshots
+![Screenshot](https://raw.githubusercontent.com/MrAdamBoyd/ABOnboarding/master/screenshots/screenshot1.png)
+![Screenshot](https://raw.githubusercontent.com/MrAdamBoyd/ABOnboarding/master/screenshots/screenshot2.png)
 
 #Usage
-1. Make your view controller conform to `ShowsABOnboardingItem`
-2. Add the following variables to your view controller:
+###1
+Make your view controller conform to `ShowsABOnboardingItem`
+
+###2
+Add the following variables to your view controller:
 ```swift 
     var onboardingToShow: [ABOnboardingItem] = []
     var onboardingIndex: Int = 0
     var currentBlurViews: [UIView] = []
     var onboardingSection: Int = 0
 ```
-3. Add the following methods to your view controller. Due to the limitations of selectors in Swift, you will have to add two action forwarders, seen below:
+###3
+Add the following methods to your view controller. Due to the limitations of selectors in Swift, you will have to add two action forwarders, seen below:
 ```swift 
     func userSkippedOnboarding() {
         //Save the status
@@ -41,7 +47,8 @@ An easy to use library built for the first time user experience of your iOS app.
         self.showNextOnboardingItem()
     }
 ```
-4. Set the onboarding items that you want to show. This is the full init method for `AbOnboardingItem`:
+###4
+Set the onboarding items that you want to show. This is the full init method for `AbOnboardingItem`:
 ```swift 
 init(message: String, placement: RelativePlacement, blurredBackground: Bool, nextItemAutomaticallyShows: Bool, leftButtonTitle: String? = nil, rightButtonTitle: String? = nil)
 ```
@@ -61,7 +68,8 @@ BlurredBackground: Bool - Whether or not the background should be obscured
 NextItemAutomaticallyShows: Bool - Whether or not the next onboarding item should show after the user hit the next button.
 LeftButtonTitle: String - Custom title for the later button
 RightButtonTitle: String - Custom title for the next button
-5. Once you set your onboarding items, all you have to do is show them on the screen! Just call `self.startOnboarding()` and the onboarding will start.
+###5
+Once you set your onboarding items, all you have to do is show them on the screen! Just call `self.startOnboarding()` and the onboarding will start.
 
 #Customization
 You can customize color, font, timing, and where the onboarding items show through the `ABOnboardingSettings` struct.
