@@ -71,7 +71,7 @@ class ViewController: UIViewController, ShowsABOnboardingItem {
     }
     
     func showNextOnboardingItemForwarder() {
-        self.showNextOnboardingItemForwarder()
+        self.showNextOnboardingItem()
     }
 
 }

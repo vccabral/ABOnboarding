@@ -16,6 +16,7 @@ public struct ABOnboardingSettings {
     public static var OnboardingText = UIColor(rgba: "#9b9b9b")
     public static var OnboardingLaterText = UIColor(rgba: "#9b9b9b")
     public static var BackgroundWhileOnboarding = UIColor.blackColor().colorWithAlphaComponent(0.85)
+    public static var Font = UIFont.systemFontOfSize(16)
     
     //Rounded button
     public static var ButtonBackgroundNormal = UIColor(rgba: "#50e3c2")

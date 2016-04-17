@@ -52,7 +52,7 @@ public class ABOnboardingView: UIView {
     public func setUpLabelAndButtons(firstItem: Bool, lastItem: Bool) {
         //Setting up the text label
         self.textLabel.textColor = ABOnboardingSettings.OnboardingText
-        self.textLabel.font = UIFont(name: "Avenir-Light", size: 16)!
+        self.textLabel.font = ABOnboardingSettings.Font
         self.textLabel.numberOfLines = 0
         self.textLabel.textAlignment = .Center
         self.textLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -78,7 +78,7 @@ public class ABOnboardingView: UIView {
         //Setting up the next button
         self.nextButton.translatesAutoresizingMaskIntoConstraints = false
         self.nextButton.setTitle((lastItem ? "Done" : "Next"), forState: .Normal)
-        self.nextButton.titleLabel?.font = UIFont(name: "Avenir-Light", size: 16)!
+        self.nextButton.titleLabel?.font = ABOnboardingSettings.Font
         self.buttonContainer.addSubview(self.nextButton)
         
         //0px right from center x, 0px from top, right, bottom
@@ -95,7 +95,7 @@ public class ABOnboardingView: UIView {
         //Setting up the later button
         self.laterButton.setTitle(firstItem ? "Maybe Later" : "Skip", forState: .Normal)
         self.laterButton.setTitleColor(ABOnboardingSettings.OnboardingLaterText, forState: .Normal)
-        self.laterButton.titleLabel?.font = UIFont(name: "Avenir-Light", size: 16)!
+        self.laterButton.titleLabel?.font = ABOnboardingSettings.Font
         self.laterButton.translatesAutoresizingMaskIntoConstraints = false
         if !lastItem {
             self.buttonContainer.addSubview(self.laterButton)
