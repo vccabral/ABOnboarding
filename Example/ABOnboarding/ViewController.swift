@@ -11,7 +11,7 @@ import ABOnboarding
 
 class ViewController: UIViewController, ShowsABOnboardingItem {
 
-    var itemsToShow: [ABOnboardingItem] = []
+    var onboardingToShow: [ABOnboardingItem] = []
     var onboardingIndex: Int = 0
     var currentBlurViews: [UIView] = []
     var onboardingSection: Int = 0
@@ -22,8 +22,8 @@ class ViewController: UIViewController, ShowsABOnboardingItem {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if self.shouldShowOnboardingOnThisVC() && self.itemsToShow.count == 0 {
-            self.itemsToShow = [
+        if self.shouldShowOnboardingOnThisVC() && self.onboardingToShow.count == 0 {
+            self.onboardingToShow = [
                 ABOnboardingItem(message: "This is pointing at a pretty awesome button", placement: .Below(self.awesomeButton), blurredBackground: true),
                 ABOnboardingItem(message: "This is another button, but this time below", placement: .Above(self.anotherButton), blurredBackground: true),
                 ABOnboardingItem(message: "It doesn't have to point at anything!", placement: .RelativeToTop(100), blurredBackground: true),

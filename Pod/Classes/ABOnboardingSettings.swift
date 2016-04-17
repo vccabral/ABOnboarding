@@ -25,5 +25,6 @@ public struct ABOnboardingSettings {
     public static var ButtonBorderNormal = UIColor.clearColor()
     public static var ButtonBorderHighlighted = UIColor(rgba: "#9b9b9b")
     
-    public static var viewToShowOnboarding: UIView?
+    public static var ViewToShowOnboarding: UIView?
+    public static var AnimationDuration: NSTimeInterval = 0.5
 }

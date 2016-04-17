@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 @objc public protocol ShowsABOnboardingItem {
-    var itemsToShow: [ABOnboardingItem] { get set }
+    var onboardingToShow: [ABOnboardingItem] { get set }
     var onboardingIndex: Int { get set }
     var currentBlurViews: [UIView] { get set }
     var onboardingSection: Int { get set }
@@ -32,14 +32,14 @@ public extension ShowsABOnboardingItem where Self: UIViewController {
      Show the onboarding from the beginning if the user hasn't been shown this onboarding before
      */
     public func startOnboarding() {
-        self.showOnboardingItem(self.itemsToShow[self.onboardingIndex], firstItem: true, lastItem: (self.itemsToShow.count == 1))
+        self.showOnboardingItem(self.onboardingToShow[self.onboardingIndex], firstItem: true, lastItem: (self.onboardingToShow.count == 1))
     }
     
     /**
      User skipped the onboarding
      */
     public func skipOnboarding() {
-        self.removeOnboardingItem(self.itemsToShow[self.onboardingIndex], onCompletion: nil)
+        self.removeOnboardingItem(self.onboardingToShow[self.onboardingIndex], onCompletion: nil)
         self.userSkippedOnboarding()
     }
     
@@ -47,29 +47,29 @@ public extension ShowsABOnboardingItem where Self: UIViewController {
      User hit next on the onboarding item, increment the counter and show that item
      */
     public func showNextOnboardingItem() {
-        if self.onboardingIndex < self.itemsToShow.count {
-            if self.itemsToShow[self.onboardingIndex].nextItemAutomaticallyShows {
+        if self.onboardingIndex < self.onboardingToShow.count {
+            if self.onboardingToShow[self.onboardingIndex].nextItemAutomaticallyShows {
                 //If the next item should automatically show, show it
                 self.onboardingIndex += 1
                 
-                if self.onboardingIndex < self.itemsToShow.count {
+                if self.onboardingIndex < self.onboardingToShow.count {
                     //Onboarding is not done, show next item
-                    self.removeOnboardingItem(self.itemsToShow[self.onboardingIndex - 1]) { () -> Void in
+                    self.removeOnboardingItem(self.onboardingToShow[self.onboardingIndex - 1]) { () -> Void in
                         
-                        self.showOnboardingItem(self.itemsToShow[self.onboardingIndex], firstItem: false, lastItem: (self.onboardingIndex >= self.itemsToShow.count - 1))
+                        self.showOnboardingItem(self.onboardingToShow[self.onboardingIndex], firstItem: false, lastItem: (self.onboardingIndex >= self.onboardingToShow.count - 1))
                     }
                 } else {
                     //Onboarding is done, complete onboarding
-                    self.removeOnboardingItem(self.itemsToShow[self.onboardingIndex - 1], onCompletion: nil)
+                    self.removeOnboardingItem(self.onboardingToShow[self.onboardingIndex - 1], onCompletion: nil)
                     self.userCompletedOnboarding()
                 }
                 
             } else {
                 
                 //If the next item shouldn't show, set this bool to true so that the next time this method is called, the item shows
-                self.itemsToShow[self.onboardingIndex].nextItemAutomaticallyShows = true
+                self.onboardingToShow[self.onboardingIndex].nextItemAutomaticallyShows = true
                 
-                self.removeOnboardingItem(self.itemsToShow[self.onboardingIndex], onCompletion: nil)
+                self.removeOnboardingItem(self.onboardingToShow[self.onboardingIndex], onCompletion: nil)
                 
             }
         }
@@ -85,7 +85,7 @@ public extension ShowsABOnboardingItem where Self: UIViewController {
         item.onboardingView.rightConstraint?.constant = -UIScreen.mainScreen().bounds.width
         
         //Animate the views to be hidden
-        UIView.animateWithDuration(0.50, animations: {() -> Void in
+        UIView.animateWithDuration(ABOnboardingSettings.AnimationDuration, animations: {() -> Void in
             for view in self.currentBlurViews {
                 view.alpha = 0
             }
@@ -225,7 +225,7 @@ public extension ShowsABOnboardingItem where Self: UIViewController {
             view.alpha = 0
         }
         
-        UIView.animateWithDuration(0.50) {
+        UIView.animateWithDuration(ABOnboardingSettings.AnimationDuration) {
             for view in self.currentBlurViews {
                 view.alpha = 1
             }
@@ -238,7 +238,7 @@ public extension ShowsABOnboardingItem where Self: UIViewController {
         //Animating the onboarding view in
         onboardingView.leftConstraint?.constant = 0
         onboardingView.rightConstraint?.constant = 0
-        UIView.animateWithDuration(0.50) { () -> Void in
+        UIView.animateWithDuration(ABOnboardingSettings.AnimationDuration) { () -> Void in
             onboardingView.alpha = 1
             globalWindowView.layoutIfNeeded()
         }
@@ -263,7 +263,7 @@ public extension ShowsABOnboardingItem where Self: UIViewController {
         //Animating the onboarding view in
         onboardingView.leftConstraint?.constant = 0
         onboardingView.rightConstraint?.constant = 0
-        UIView.animateWithDuration(0.50) { () -> Void in
+        UIView.animateWithDuration(ABOnboardingSettings.AnimationDuration) { () -> Void in
             blur.alpha = 1
             onboardingView.alpha = 1
             globalWindowView.layoutIfNeeded()
@@ -289,7 +289,7 @@ public extension ShowsABOnboardingItem where Self: UIViewController {
         //Animating the onboarding view in
         onboardingView.leftConstraint?.constant = 0
         onboardingView.rightConstraint?.constant = 0
-        UIView.animateWithDuration(0.50) { () -> Void in
+        UIView.animateWithDuration(ABOnboardingSettings.AnimationDuration) { () -> Void in
             blur.alpha = 1
             onboardingView.alpha = 1
             globalWindowView.layoutIfNeeded()
@@ -403,7 +403,7 @@ public extension ShowsABOnboardingItem where Self: UIViewController {
             }
         }
         
-        if let view = ABOnboardingSettings.viewToShowOnboarding {
+        if let view = ABOnboardingSettings.ViewToShowOnboarding {
             return view
         } else {
             return self.view
