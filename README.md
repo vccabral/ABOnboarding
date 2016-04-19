@@ -1,4 +1,4 @@
-HidingNavigationBar
+ABOnboarding
 ==============
 [![CocoaPods](https://img.shields.io/cocoapods/v/HidingNavigationBar.svg)](https://github.com/MrAdamBoyd/ABOnboarding)
 
