@@ -52,8 +52,9 @@ Set the onboarding items that you want to show. This is the full init method for
 ```swift 
 init(message: String, placement: RelativePlacement, blurredBackground: Bool, nextItemAutomaticallyShows: Bool, leftButtonTitle: String? = nil, rightButtonTitle: String? = nil)
 ```
-Message: String - The main text of the onboarding view.
-Placement: RelativePlacement - Where the onboarding item will show on screen. Here is the RelativePlacement enum
+`message`: `String` - The main text of the onboarding view.
+
+`placement`: `RelativePlacement` - Where the onboarding item will show on screen. Here is the RelativePlacement enum
 ```swift 
 public enum RelativePlacement {
     case Above(UIView),
@@ -64,10 +65,13 @@ public enum RelativePlacement {
     PointingDownAt(CGRect)
 }
 ```
-BlurredBackground: Bool - Whether or not the background should be obscured
-NextItemAutomaticallyShows: Bool - Whether or not the next onboarding item should show after the user hit the next button.
-LeftButtonTitle: String - Custom title for the later button
-RightButtonTitle: String - Custom title for the next button
+`blurredBackground`: `Bool` - Whether or not the background should be obscured
+
+`nextItemAutomaticallyShows`: `Bool` - Whether or not the next onboarding item should show after the user hit the next button.
+
+`leftButtonTitle`: `String` - Custom title for the later button
+
+`rightButtonTitle`: `String` - Custom title for the next button
 ###5
 Once you set your onboarding items, all you have to do is show them on the screen! Just call `self.startOnboarding()` and the onboarding will start.
 
