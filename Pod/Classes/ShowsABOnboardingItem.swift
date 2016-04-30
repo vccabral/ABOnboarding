@@ -32,7 +32,11 @@ public extension ShowsABOnboardingItem where Self: UIViewController {
      Show the onboarding from the beginning if the user hasn't been shown this onboarding before
      */
     public func startOnboarding() {
-        self.showOnboardingItem(self.onboardingToShow[self.onboardingIndex], firstItem: true, lastItem: (self.onboardingToShow.count == 1))
+        if onboardingToShow.count == 0 {
+            debugPrint("There are no onboarding items to show")
+        } else {
+            self.showOnboardingItem(self.onboardingToShow[self.onboardingIndex], firstItem: true, lastItem: (self.onboardingToShow.count == 1))
+        }
     }
     
     /**
