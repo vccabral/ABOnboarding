@@ -16,6 +16,7 @@ public class ABOnboardingView: UIView {
     var nextButton = FilledRoundedButton()
     var laterButton = UIButton()
     var triangleView = TriangleView()
+    var imageView: UIImageView?
     
     //Constraints for animating
     var leftConstraint: NSLayoutConstraint?
@@ -33,6 +34,7 @@ public class ABOnboardingView: UIView {
     
     public func setUpWith(item: ABOnboardingItem, firstItem: Bool, lastItem: Bool) {
         self.textLabel.text = item.message
+        self.imageView = UIImageView(image: item.image)
         
         switch item.placement {
         case .Above(_), .PointingDownAt(_):
@@ -43,13 +45,30 @@ public class ABOnboardingView: UIView {
             break //No Triangle
         }
         
-        self.setUpLabelAndButtons(firstItem, lastItem: lastItem)
+        self.setUpLabelAndButtonsAndImage(firstItem, lastItem: lastItem)
     }
     
     /**
      Adds all the labels and buttons to self with the correct layout constraints
      */
-    public func setUpLabelAndButtons(firstItem: Bool, lastItem: Bool) {
+    public func setUpLabelAndButtonsAndImage(firstItem: Bool, lastItem: Bool) {
+        // Check if the text should be below the image or at the top of the container view
+        var topView: UIView = self
+        var topViewAttribute = NSLayoutAttribute.Top
+        
+        //Setting up the image view (if it was provided)
+        if let imageView = self.imageView {
+            // Mark that an image view was supplied so the text should align below it
+            topView = imageView
+            topViewAttribute = NSLayoutAttribute.Bottom
+            
+            imageView.translatesAutoresizingMaskIntoConstraints = false
+            self.addSubview(imageView)
+            
+            self.addConstraint(NSLayoutConstraint(item: imageView, attribute: .Top, relatedBy: .Equal, toItem: self, attribute: .Top, multiplier: 1, constant: 16))
+            self.addConstraint(NSLayoutConstraint(item: imageView, attribute: .CenterX, relatedBy: .Equal, toItem: self, attribute: .CenterX, multiplier: 1, constant: 0))
+        }
+        
         //Setting up the text label
         self.textLabel.textColor = ABOnboardingSettings.OnboardingText
         self.textLabel.font = ABOnboardingSettings.Font
@@ -59,7 +78,7 @@ public class ABOnboardingView: UIView {
         self.addSubview(self.textLabel)
         
         //0px from top, left, right
-        self.addConstraint(NSLayoutConstraint(item: self.textLabel, attribute: .Top, relatedBy: .Equal, toItem: self, attribute: .Top, multiplier: 1, constant: 16))
+        self.addConstraint(NSLayoutConstraint(item: self.textLabel, attribute: .Top, relatedBy: .Equal, toItem: topView, attribute: topViewAttribute, multiplier: 1, constant: 16))
         self.addConstraint(NSLayoutConstraint(item: self.textLabel, attribute: .Left, relatedBy: .Equal, toItem: self, attribute: .Left, multiplier: 1, constant: 8))
         self.addConstraint(NSLayoutConstraint(item: self.textLabel, attribute: .Right, relatedBy: .Equal, toItem: self, attribute: .Right, multiplier: 1, constant: -8))
         
@@ -128,4 +147,7 @@ public class ABOnboardingView: UIView {
         }
     }
     
+    public func addImageView() {
+        
+    }
 }

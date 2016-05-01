@@ -31,21 +31,24 @@ public enum RelativePlacement {
     var nextItemAutomaticallyShows: Bool = true
     var leftButtonTitle: String?
     var rightButtonTitle: String?
+    var image: UIImage?
     
-    public init(message: String, placement: RelativePlacement, blurredBackground: Bool, leftButtonTitle: String? = nil, rightButtonTitle: String? = nil) {
+    public init(message: String, placement: RelativePlacement, blurredBackground: Bool, leftButtonTitle: String? = nil, rightButtonTitle: String? = nil, image:  UIImage? = nil) {
         self.message = message
         self.placement = placement
         self.blurredBackground = blurredBackground
         self.leftButtonTitle = leftButtonTitle
         self.rightButtonTitle = rightButtonTitle
+        self.image = image
     }
     
-    public init(message: String, placement: RelativePlacement, blurredBackground: Bool, nextItemAutomaticallyShows: Bool, leftButtonTitle: String? = nil, rightButtonTitle: String? = nil) {
+    public init(message: String, placement: RelativePlacement, blurredBackground: Bool, nextItemAutomaticallyShows: Bool, leftButtonTitle: String? = nil, rightButtonTitle: String? = nil, image: UIImage? = nil) {
         self.message = message
         self.placement = placement
         self.blurredBackground = blurredBackground
         self.nextItemAutomaticallyShows = nextItemAutomaticallyShows
         self.leftButtonTitle = leftButtonTitle
         self.rightButtonTitle = rightButtonTitle
+        self.image = image
     }
 }
