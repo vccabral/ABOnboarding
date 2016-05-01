@@ -391,6 +391,7 @@ public extension ShowsABOnboardingItem where Self: UIViewController {
     private func createBlurView(alpha: CGFloat = 0.8) -> UIView {
         let blur = UIView()
         blur.backgroundColor = UIColor.blackColor().colorWithAlphaComponent(alpha)
+        blur.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.skipOnboardingForwarder)))
         
         return blur
     }
