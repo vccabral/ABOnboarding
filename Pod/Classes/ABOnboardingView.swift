@@ -33,7 +33,10 @@ public class ABOnboardingView: UIView {
     }
     
     public func setUpWith(item: ABOnboardingItem, firstItem: Bool, lastItem: Bool) {
-        self.textLabel.text = item.message
+        switch item.message {
+        case .Regular(let string):              self.textLabel.text = string
+        case .Attributed(let attributedString): self.textLabel.attributedText = attributedString
+        }
         self.imageView = UIImageView(image: item.image)
         
         switch item.placement {
