@@ -2,7 +2,7 @@ Pod::Spec.new do |s|
   s.name             = "ABOnboarding"
   s.version          = "1.1"
   s.summary          = "The easiest way to onboard users in your iOS app"
-  s.homepage         = "https://github.com/MrAdamBoyd/ABOnboarding"
+  s.homepage         = "https://github.com/Under100/ABOnboarding"
   s.license          = 'MIT'
   s.author           = { "Adam Boyd" => "adamboyd50@gmail.com" }
   s.source           = { :git => "https://github.com/MrAdamBoyd/ABOnboarding.git", :tag => s.version.to_s }
