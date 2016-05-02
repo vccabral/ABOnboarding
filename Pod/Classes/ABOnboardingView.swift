@@ -147,7 +147,4 @@ public class ABOnboardingView: UIView {
         }
     }
     
-    public func addImageView() {
-        
-    }
 }
