@@ -73,7 +73,7 @@ public class ABOnboardingView: UIView {
         self.textLabel.textColor = ABOnboardingSettings.OnboardingText
         self.textLabel.font = ABOnboardingSettings.Font
         self.textLabel.numberOfLines = 0
-        self.textLabel.textAlignment = .Center
+        self.textLabel.textAlignment = .Left
         self.textLabel.translatesAutoresizingMaskIntoConstraints = false
         self.addSubview(self.textLabel)
         
@@ -104,7 +104,7 @@ public class ABOnboardingView: UIView {
         self.buttonContainer.addConstraint(NSLayoutConstraint(item: self.nextButton, attribute: .Top, relatedBy: .Equal, toItem: self.buttonContainer, attribute: .Top, multiplier: 1, constant: 0))
         self.buttonContainer.addConstraint(NSLayoutConstraint(item: self.nextButton, attribute: .Right, relatedBy: .Equal, toItem: self.buttonContainer, attribute: .Right, multiplier: 1, constant: 0))
         self.buttonContainer.addConstraint(NSLayoutConstraint(item: self.nextButton, attribute: .Bottom, relatedBy: .Equal, toItem: self.buttonContainer, attribute: .Bottom, multiplier: 1, constant: 0))
-        self.buttonContainer.addConstraint(NSLayoutConstraint(item: self.nextButton, attribute: .Width, relatedBy: .Equal, toItem: nil, attribute: .NotAnAttribute, multiplier: 1, constant: 100))
+        self.buttonContainer.addConstraint(NSLayoutConstraint(item: self.nextButton, attribute: .Width, relatedBy: .Equal, toItem: nil, attribute: .NotAnAttribute, multiplier: 1, constant: 137))
         if lastItem {
             self.buttonContainer.addConstraint(NSLayoutConstraint(item: self.nextButton, attribute: .Left, relatedBy: .Equal, toItem: self.buttonContainer, attribute: .Left, multiplier: 1, constant: 0))
         } else {

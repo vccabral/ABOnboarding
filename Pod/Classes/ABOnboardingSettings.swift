@@ -28,4 +28,5 @@ public struct ABOnboardingSettings {
     
     public static var ViewToShowOnboarding: UIView?
     public static var AnimationDuration: NSTimeInterval = 0.5
+    public static var TouchesDisabledOnUncoveredRect: Bool = true
 }

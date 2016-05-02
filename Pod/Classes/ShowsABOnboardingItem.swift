@@ -32,7 +32,7 @@ public extension ShowsABOnboardingItem where Self: UIViewController {
      Show the onboarding from the beginning if the user hasn't been shown this onboarding before
      */
     public func startOnboarding() {
-        if onboardingToShow.count == 0 {
+        if self.onboardingToShow.count == 0 {
             debugPrint("There are no onboarding items to show")
         } else {
             self.showOnboardingItem(self.onboardingToShow[self.onboardingIndex], firstItem: true, lastItem: (self.onboardingToShow.count == 1))
@@ -168,7 +168,7 @@ public extension ShowsABOnboardingItem where Self: UIViewController {
         
         let blurOpacity: CGFloat = item.blurredBackground ? 0.8 : 0
         //Setting up top blur
-        let topBlur = self.createBlurView(blurOpacity)
+        let topBlur = self.createBlurView(withAlpha: blurOpacity)
         self.currentBlurViews.append(topBlur)
         topBlur.translatesAutoresizingMaskIntoConstraints = false
         globalWindowView.addSubview(topBlur)
@@ -181,7 +181,7 @@ public extension ShowsABOnboardingItem where Self: UIViewController {
         
         
         //Setting up the bottom blur
-        let bottomBlur = self.createBlurView(blurOpacity)
+        let bottomBlur = self.createBlurView(withAlpha: blurOpacity)
         self.currentBlurViews.append(bottomBlur)
         bottomBlur.translatesAutoresizingMaskIntoConstraints = false
         globalWindowView.addSubview(bottomBlur)
@@ -200,7 +200,7 @@ public extension ShowsABOnboardingItem where Self: UIViewController {
         
         
         //Setting up the left blur
-        let leftBlur = self.createBlurView(blurOpacity)
+        let leftBlur = self.createBlurView(withAlpha: blurOpacity)
         self.currentBlurViews.append(leftBlur)
         leftBlur.translatesAutoresizingMaskIntoConstraints = false
         globalWindowView.addSubview(leftBlur)
@@ -213,7 +213,7 @@ public extension ShowsABOnboardingItem where Self: UIViewController {
         
         
         //Setting up the right blur
-        let rightBlur = self.createBlurView(blurOpacity)
+        let rightBlur = self.createBlurView(withAlpha: blurOpacity)
         self.currentBlurViews.append(rightBlur)
         rightBlur.translatesAutoresizingMaskIntoConstraints = false
         globalWindowView.addSubview(rightBlur)
@@ -223,6 +223,20 @@ public extension ShowsABOnboardingItem where Self: UIViewController {
         globalWindowView.addConstraint(NSLayoutConstraint(item: rightBlur, attribute: .Bottom, relatedBy: .Equal, toItem: bottomBlur, attribute: .Top, multiplier: 1, constant: 0))
         globalWindowView.addConstraint(NSLayoutConstraint(item: rightBlur, attribute: .Right, relatedBy: .Equal, toItem: globalWindowView, attribute: .Right, multiplier: 1, constant: 0))
         globalWindowView.addConstraint(NSLayoutConstraint(item: rightBlur, attribute: .Left, relatedBy: .Equal, toItem: leftBlur, attribute: .Right, multiplier: 1, constant: min(itemFrame.width + 10, UIScreen.mainScreen().bounds.width)))
+        
+        if ABOnboardingSettings.TouchesDisabledOnUncoveredRect {
+            let clearCover = self.createBlurView(withAlpha: 0)
+            self.currentBlurViews.append(clearCover)
+            clearCover.translatesAutoresizingMaskIntoConstraints = false
+            globalWindowView.addSubview(clearCover)
+            
+            //0px from topBlur, leftBlur, rightBlur, bottomBlur
+            globalWindowView.addConstraint(NSLayoutConstraint(item: clearCover, attribute: .Top, relatedBy: .Equal, toItem: topBlur, attribute: .Bottom, multiplier: 1, constant: 0))
+            globalWindowView.addConstraint(NSLayoutConstraint(item: clearCover, attribute: .Left, relatedBy: .Equal, toItem: leftBlur, attribute: .Right, multiplier: 1, constant: 0))
+            globalWindowView.addConstraint(NSLayoutConstraint(item: clearCover, attribute: .Right, relatedBy: .Equal, toItem: rightBlur, attribute: .Left, multiplier: 1, constant: 0))
+            globalWindowView.addConstraint(NSLayoutConstraint(item: clearCover, attribute: .Bottom, relatedBy: .Equal, toItem: bottomBlur, attribute: .Top, multiplier: 1, constant: 0))
+            
+        }
         
         //Applying some effects to the view to prepare them for animation
         for view in self.currentBlurViews {
@@ -240,8 +254,8 @@ public extension ShowsABOnboardingItem where Self: UIViewController {
         globalWindowView.layoutIfNeeded()
         
         //Animating the onboarding view in
-        onboardingView.leftConstraint?.constant = 0
-        onboardingView.rightConstraint?.constant = 0
+        onboardingView.leftConstraint?.constant = 7
+        onboardingView.rightConstraint?.constant = -7
         UIView.animateWithDuration(ABOnboardingSettings.AnimationDuration) { () -> Void in
             onboardingView.alpha = 1
             globalWindowView.layoutIfNeeded()
@@ -258,15 +272,15 @@ public extension ShowsABOnboardingItem where Self: UIViewController {
     private func showOnboardingItem(item: ABOnboardingItem, relativeToTop: CGFloat, isFirstItem firstItem: Bool, isLastItem lastItem: Bool) {
         let globalWindowView = self.getViewToAddOnboarding()
         
-        let blur = self.setUpBlurViewWithAlpha((item.blurredBackground ? 0.8 : 0), globalWindowView: globalWindowView)
+        let blur = self.setUpBlurView(withAlpha: (item.blurredBackground ? 0.8 : 0), globalWindowView: globalWindowView)
         
         let onboardingView = self.setUpOnboardingViewWithItem(item, globalWindowView: globalWindowView, isFirstItem: firstItem, isLastItem: lastItem, itemFrame: nil, globalPointOrigin: nil, isAbove: nil, relativeToTop: relativeToTop)
         
         globalWindowView.layoutIfNeeded()
         
         //Animating the onboarding view in
-        onboardingView.leftConstraint?.constant = 0
-        onboardingView.rightConstraint?.constant = 0
+        onboardingView.leftConstraint?.constant = 7
+        onboardingView.rightConstraint?.constant = -7
         UIView.animateWithDuration(ABOnboardingSettings.AnimationDuration) { () -> Void in
             blur.alpha = 1
             onboardingView.alpha = 1
@@ -284,15 +298,15 @@ public extension ShowsABOnboardingItem where Self: UIViewController {
     private func showOnboardingItem(item: ABOnboardingItem, relativeToBottom: CGFloat, isFirstItem firstItem: Bool, isLastItem lastItem: Bool) {
         let globalWindowView = self.getViewToAddOnboarding()
         
-        let blur = self.setUpBlurViewWithAlpha((item.blurredBackground ? 0.8 : 0), globalWindowView: globalWindowView)
+        let blur = self.setUpBlurView(withAlpha: (item.blurredBackground ? 0.8 : 0), globalWindowView: globalWindowView)
         
         let onboardingView = self.setUpOnboardingViewWithItem(item, globalWindowView: globalWindowView, isFirstItem: firstItem, isLastItem: lastItem, itemFrame: nil, globalPointOrigin: nil, isAbove: nil, relativeToBottom: relativeToBottom)
         
         globalWindowView.layoutIfNeeded()
         
         //Animating the onboarding view in
-        onboardingView.leftConstraint?.constant = 0
-        onboardingView.rightConstraint?.constant = 0
+        onboardingView.leftConstraint?.constant = 7
+        onboardingView.rightConstraint?.constant = -7
         UIView.animateWithDuration(ABOnboardingSettings.AnimationDuration) { () -> Void in
             blur.alpha = 1
             onboardingView.alpha = 1
@@ -318,6 +332,7 @@ public extension ShowsABOnboardingItem where Self: UIViewController {
         onboardingView.setUpWith(item, firstItem: firstItem, lastItem: lastItem)
         item.onboardingView = onboardingView
         onboardingView.alpha = 0
+        onboardingView.layer.cornerRadius = 5
         onboardingView.translatesAutoresizingMaskIntoConstraints = false
         globalWindowView.addSubview(onboardingView)
         
@@ -326,8 +341,8 @@ public extension ShowsABOnboardingItem where Self: UIViewController {
         onboardingView.nextButton.addTarget(self, action: #selector(self.showNextOnboardingItemForwarder), forControlEvents: .TouchUpInside)
         
         //0px from left, right, height determined by item's potion. It starts 100px over for animation
-        onboardingView.leftConstraint = NSLayoutConstraint(item: onboardingView, attribute: .Left, relatedBy: .Equal, toItem: globalWindowView, attribute: .Left, multiplier: 1, constant: UIScreen.mainScreen().bounds.width)
-        onboardingView.rightConstraint = NSLayoutConstraint(item: onboardingView, attribute: .Right, relatedBy: .Equal, toItem: globalWindowView, attribute: .Right, multiplier: 1, constant: UIScreen.mainScreen().bounds.width)
+        onboardingView.leftConstraint = NSLayoutConstraint(item: onboardingView, attribute: .Left, relatedBy: .Equal, toItem: globalWindowView, attribute: .Left, multiplier: 1, constant: UIScreen.mainScreen().bounds.width + 7)
+        onboardingView.rightConstraint = NSLayoutConstraint(item: onboardingView, attribute: .Right, relatedBy: .Equal, toItem: globalWindowView, attribute: .Right, multiplier: 1, constant: UIScreen.mainScreen().bounds.width - 7)
         globalWindowView.addConstraint(onboardingView.leftConstraint!)
         globalWindowView.addConstraint(onboardingView.rightConstraint!)
         
@@ -367,8 +382,8 @@ public extension ShowsABOnboardingItem where Self: UIViewController {
      
      - parameter globalView: global view of the app
      */
-    private func setUpBlurViewWithAlpha(alpha: CGFloat, globalWindowView: UIView) -> UIView {
-        let blur = self.createBlurView(alpha)
+    private func setUpBlurView(withAlpha alpha: CGFloat, globalWindowView: UIView) -> UIView {
+        let blur = self.createBlurView(withAlpha: alpha)
         self.currentBlurViews.append(blur)
         blur.translatesAutoresizingMaskIntoConstraints = false
         blur.alpha = 0
@@ -388,7 +403,7 @@ public extension ShowsABOnboardingItem where Self: UIViewController {
      
      - returns: blurred view
      */
-    private func createBlurView(alpha: CGFloat = 0.8) -> UIView {
+    private func createBlurView(withAlpha alpha: CGFloat = 0.8) -> UIView {
         let blur = UIView()
         blur.backgroundColor = UIColor.blackColor().colorWithAlphaComponent(alpha)
         blur.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.skipOnboardingForwarder)))
