@@ -41,23 +41,14 @@ public enum StringType {
         }
     }
     var blurredBackground: Bool
-    var nextItemAutomaticallyShows: Bool = true
+    var nextItemAutomaticallyShows: Bool
     var leftButtonTitle: String?
     var rightButtonTitle: String?
     var image: UIImage?
+    var textAlign: NSTextAlignment
     
     //Regular strings
-    
-    public init(message: String, placement: RelativePlacement, blurredBackground: Bool, leftButtonTitle: String? = nil, rightButtonTitle: String? = nil, image:  UIImage? = nil) {
-        self.message = StringType(string: message)
-        self.placement = placement
-        self.blurredBackground = blurredBackground
-        self.leftButtonTitle = leftButtonTitle
-        self.rightButtonTitle = rightButtonTitle
-        self.image = image
-    }
-    
-    public init(message: String, placement: RelativePlacement, blurredBackground: Bool, nextItemAutomaticallyShows: Bool, leftButtonTitle: String? = nil, rightButtonTitle: String? = nil, image: UIImage? = nil) {
+    public init(message: String, placement: RelativePlacement, blurredBackground: Bool, nextItemAutomaticallyShows: Bool = true, leftButtonTitle: String? = nil, rightButtonTitle: String? = nil, image: UIImage? = nil, textAlign: NSTextAlignment = .Left) {
         self.message = StringType(string: message)
         self.placement = placement
         self.blurredBackground = blurredBackground
@@ -65,19 +56,11 @@ public enum StringType {
         self.leftButtonTitle = leftButtonTitle
         self.rightButtonTitle = rightButtonTitle
         self.image = image
+        self.textAlign = textAlign
     }
     
     //Attributed strings
-    public init(attributedString: NSAttributedString, placement: RelativePlacement, blurredBackground: Bool, leftButtonTitle: String? = nil, rightButtonTitle: String? = nil, image:  UIImage? = nil) {
-        self.message = StringType(attributedString: attributedString)
-        self.placement = placement
-        self.blurredBackground = blurredBackground
-        self.leftButtonTitle = leftButtonTitle
-        self.rightButtonTitle = rightButtonTitle
-        self.image = image
-    }
-    
-    public init(attributedString: NSAttributedString, placement: RelativePlacement, blurredBackground: Bool, nextItemAutomaticallyShows: Bool, leftButtonTitle: String? = nil, rightButtonTitle: String? = nil, image: UIImage? = nil) {
+    public init(attributedString: NSAttributedString, placement: RelativePlacement, blurredBackground: Bool, nextItemAutomaticallyShows: Bool = true, leftButtonTitle: String? = nil, rightButtonTitle: String? = nil, image: UIImage? = nil, textAlign: NSTextAlignment = .Left) {
         self.message = StringType(attributedString: attributedString)
         self.placement = placement
         self.blurredBackground = blurredBackground
@@ -85,5 +68,6 @@ public enum StringType {
         self.leftButtonTitle = leftButtonTitle
         self.rightButtonTitle = rightButtonTitle
         self.image = image
+        self.textAlign = textAlign
     }
 }

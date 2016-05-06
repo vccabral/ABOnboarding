@@ -48,13 +48,13 @@ public class ABOnboardingView: UIView {
             break //No Triangle
         }
         
-        self.setUpLabelAndButtonsAndImage(firstItem, lastItem: lastItem)
+        self.setUpLabelAndButtonsAndImage(firstItem, lastItem: lastItem, textAlign: item.textAlign)
     }
     
     /**
      Adds all the labels and buttons to self with the correct layout constraints
      */
-    public func setUpLabelAndButtonsAndImage(firstItem: Bool, lastItem: Bool) {
+    public func setUpLabelAndButtonsAndImage(firstItem: Bool, lastItem: Bool, textAlign: NSTextAlignment) {
         // Check if the text should be below the image or at the top of the container view
         var topView: UIView = self
         var topViewAttribute = NSLayoutAttribute.Top
@@ -76,7 +76,7 @@ public class ABOnboardingView: UIView {
         self.textLabel.textColor = ABOnboardingSettings.OnboardingText
         self.textLabel.font = ABOnboardingSettings.Font
         self.textLabel.numberOfLines = 0
-        self.textLabel.textAlignment = .Left
+        self.textLabel.textAlignment = textAlign
         self.textLabel.translatesAutoresizingMaskIntoConstraints = false
         self.addSubview(self.textLabel)
         
