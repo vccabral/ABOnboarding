@@ -123,7 +123,6 @@ public class ABOnboardingView: UIView {
             self.buttonContainer.addSubview(self.laterButton)
             
             //0px right from center x, 0px from top, left, bottom
-            self.buttonContainer.addConstraint(NSLayoutConstraint(item: self.laterButton, attribute: .Right, relatedBy: .Equal, toItem: self.buttonContainer, attribute: .CenterX, multiplier: 1, constant: -10))
             self.buttonContainer.addConstraint(NSLayoutConstraint(item: self.laterButton, attribute: .Top, relatedBy: .Equal, toItem: self.buttonContainer, attribute: .Top, multiplier: 1, constant: 0))
             self.buttonContainer.addConstraint(NSLayoutConstraint(item: self.laterButton, attribute: .Left, relatedBy: .Equal, toItem: self.buttonContainer, attribute: .Left, multiplier: 1, constant: 0))
             self.buttonContainer.addConstraint(NSLayoutConstraint(item: self.laterButton, attribute: .Bottom, relatedBy: .Equal, toItem: self.buttonContainer, attribute: .Bottom, multiplier: 1, constant: 0))

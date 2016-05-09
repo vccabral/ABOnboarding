@@ -360,7 +360,7 @@ public extension ShowsABOnboardingItem where Self: UIViewController {
             }
             
             //Putting the triangle in the right spot
-            onboardingView.addConstraint(NSLayoutConstraint(item: onboardingView.triangleView, attribute: .CenterX, relatedBy: .Equal, toItem: onboardingView, attribute: .Left, multiplier: 1, constant: globalPointOrigin.x + (itemFrame.width / 2)))
+            onboardingView.addConstraint(NSLayoutConstraint(item: onboardingView.triangleView, attribute: .CenterX, relatedBy: .Equal, toItem: onboardingView, attribute: .Left, multiplier: 1, constant: globalPointOrigin.x + (itemFrame.width / 2) - 8))
             
         } else if let relativeToTop = relativeToTop {
             
