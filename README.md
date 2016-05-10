@@ -48,11 +48,12 @@ Add the following methods to your view controller. Due to the limitations of sel
     }
 ```
 ###4
-Set the onboarding items that you want to show. This is the full init method for `AbOnboardingItem`:
+Set the onboarding items that you want to show. There are two different inits for `AbOnboardingItem`, one with a regular `String` and one with an `NSAttributedString`:
 ```swift 
-init(message: String, placement: RelativePlacement, blurredBackground: Bool, nextItemAutomaticallyShows: Bool, leftButtonTitle: String? = nil, rightButtonTitle: String? = nil)
+init(message: String, placement: RelativePlacement, blurredBackground: Bool, nextItemAutomaticallyShows: Bool = true, leftButtonTitle: String? = nil, rightButtonTitle: String? = nil, image: UIImage? = nil, textAlign: NSTextAlignment = .Left)
+init(attributedString: NSAttributedString, placement: RelativePlacement, blurredBackground: Bool, nextItemAutomaticallyShows: Bool = true, leftButtonTitle: String? = nil, rightButtonTitle: String? = nil, image: UIImage? = nil, textAlign: NSTextAlignment = .Left)
 ```
-`message`: `String` - The main text of the onboarding view.
+`message`: `String` OR 'attributedString`: `NSAttributedString` - The main text of the onboarding view.
 
 `placement`: `RelativePlacement` - Where the onboarding item will show on screen. Here is the RelativePlacement enum
 ```swift 
@@ -72,6 +73,11 @@ public enum RelativePlacement {
 `leftButtonTitle`: `String` - Custom title for the later button
 
 `rightButtonTitle`: `String` - Custom title for the next button
+
+`image`: `UIImage` - Image that shows at the top of the onboarding item
+
+`textAlign`: `NSTextAlignment` - Text alignment for the main label
+
 ###5
 Once you set your onboarding items, all you have to do is show them on the screen! Just call `self.startOnboarding()` and the onboarding will start.
 
@@ -81,21 +87,22 @@ You can customize color, font, timing, and where the onboarding items show throu
     //Background and text
     public static var OnboardingBackground = UIColor.whiteColor()
     public static var OnboardingNextButtonBackground = UIColor.whiteColor()
-    public static var OnboardingText = UIColor(rgba: "#9b9b9b")
-    public static var OnboardingLaterText = UIColor(rgba: "#9b9b9b")
+    public static var OnboardingText = UIColor.grayColor()
+    public static var OnboardingLaterText = UIColor.grayColor()
     public static var BackgroundWhileOnboarding = UIColor.blackColor().colorWithAlphaComponent(0.85)
     public static var Font = UIFont.systemFontOfSize(16)
     
     //Rounded button
-    public static var ButtonBackgroundNormal = UIColor(rgba: "#50e3c2")
+    public static var ButtonBackgroundNormal = UIColor.redColor()
     public static var ButtonBackgroundHighlighted = UIColor.clearColor()
     public static var ButtonTextNormal = UIColor.whiteColor()
-    public static var ButtonTextHighlighted = UIColor(rgba: "#9b9b9b")
+    public static var ButtonTextHighlighted = UIColor.grayColor()
     public static var ButtonBorderNormal = UIColor.clearColor()
-    public static var ButtonBorderHighlighted = UIColor(rgba: "#9b9b9b")
+    public static var ButtonBorderHighlighted = UIColor.grayColor()
     
     public static var ViewToShowOnboarding: UIView?
     public static var AnimationDuration: NSTimeInterval = 0.5
+    public static var TouchesDisabledOnUncoveredRect: Bool = true
 ```
 
 #Installation
