@@ -27,7 +27,7 @@ Add the following variables to your view controller:
     var onboardingSection: Int = 0
 ```
 ###3
-Add the following methods to your view controller. Due to the limitations of selectors in Swift, you will have to add two action forwarders, seen below:
+Add the following methods to your view controller:
 ```swift 
     func userSkippedOnboarding() {
         //Save the status
@@ -39,13 +39,6 @@ Add the following methods to your view controller. Due to the limitations of sel
         //Your logic for whether or not to show onboarding
     }
 
-    //Action forwarders
-    func skipOnboardingForwarder() {
-        self.skipOnboarding()
-    }
-    func showNextOnboardingItemForwarder() {
-        self.showNextOnboardingItem()
-    }
 ```
 ###4
 Set the onboarding items that you want to show. There are two different inits for `AbOnboardingItem`, one with a regular `String` and one with an `NSAttributedString`:

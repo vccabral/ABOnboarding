@@ -16,9 +16,8 @@ import UIKit
     var onboardingSection: Int { get set }
     optional var showInVCInsteadOfWindow: Bool { get set }
     
-    //Action forwarders
-    func skipOnboardingForwarder()
-    func showNextOnboardingItemForwarder()
+    optional func skipOnboarding()
+    optional func showNextOnboardingItem()
     
     //Must be implemented
     func userSkippedOnboarding()
@@ -337,8 +336,8 @@ public extension ShowsABOnboardingItem where Self: UIViewController {
         globalWindowView.addSubview(onboardingView)
         
         //Adding the selectors to the next and skip buttons
-        onboardingView.laterButton.addTarget(self, action: #selector(self.skipOnboardingForwarder), forControlEvents: .TouchUpInside)
-        onboardingView.nextButton.addTarget(self, action: #selector(self.showNextOnboardingItemForwarder), forControlEvents: .TouchUpInside)
+        onboardingView.laterButton.addTarget(self, action: #selector(self.skipOnboarding), forControlEvents: .TouchUpInside)
+        onboardingView.nextButton.addTarget(self, action: #selector(self.showNextOnboardingItem), forControlEvents: .TouchUpInside)
         
         //0px from left, right, height determined by item's potion. It starts 100px over for animation
         onboardingView.leftConstraint = NSLayoutConstraint(item: onboardingView, attribute: .Left, relatedBy: .Equal, toItem: globalWindowView, attribute: .Left, multiplier: 1, constant: UIScreen.mainScreen().bounds.width + 7)
@@ -406,7 +405,7 @@ public extension ShowsABOnboardingItem where Self: UIViewController {
     private func createBlurView(withAlpha alpha: CGFloat = 0.8) -> UIView {
         let blur = UIView()
         blur.backgroundColor = UIColor.blackColor().colorWithAlphaComponent(alpha)
-        blur.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.skipOnboardingForwarder)))
+        blur.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.skipOnboarding)))
         
         return blur
     }
