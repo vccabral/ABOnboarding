@@ -16,22 +16,16 @@ An easy to use library built for the first time user experience of your iOS app.
 ![Screenshot](https://raw.githubusercontent.com/MrAdamBoyd/ABOnboarding/master/screenshots/screenshot2.png)
 
 # Usage
-###1
+1. Make your view controller conform to `ShowsABOnboardingItem`
 
-Make your view controller conform to `ShowsABOnboardingItem`
-
-2
-###
-Add the following variables to your view controller:
+2. Add the following variables to your view controller:
 ```swift 
     var onboardingToShow: [ABOnboardingItem] = []
     var onboardingIndex: Int = 0
     var currentBlurViews: [UIView] = []
     var onboardingSection: Int = 0
 ```
-3
-###
-Add the following methods to your view controller. Due to the limitations of selectors in Swift, you will have to add two action forwarders, seen below:
+3. Add the following methods to your view controller. Due to the limitations of selectors in Swift, you will have to add two action forwarders, seen below:
 ```swift 
     func userSkippedOnboarding() {
         //Save the status
@@ -51,9 +45,7 @@ Add the following methods to your view controller. Due to the limitations of sel
         self.showNextOnboardingItem()
     }
 ```
-4
-###
-Set the onboarding items that you want to show. There are two different inits for `AbOnboardingItem`, one with a regular `String` and one with an `NSAttributedString`:
+4. Set the onboarding items that you want to show. There are two different inits for `AbOnboardingItem`, one with a regular `String` and one with an `NSAttributedString`:
 ```swift 
 init(message: String, placement: RelativePlacement, blurredBackground: Bool, nextItemAutomaticallyShows: Bool = true, leftButtonTitle: String? = nil, rightButtonTitle: String? = nil, image: UIImage? = nil, textAlign: NSTextAlignment = .Left)
 init(attributedString: NSAttributedString, placement: RelativePlacement, blurredBackground: Bool, nextItemAutomaticallyShows: Bool = true, leftButtonTitle: String? = nil, rightButtonTitle: String? = nil, image: UIImage? = nil, textAlign: NSTextAlignment = .Left)
@@ -83,9 +75,7 @@ public enum RelativePlacement {
 
 `textAlign`: `NSTextAlignment` - Text alignment for the main label
 
-5
-###
-Once you set your onboarding items, all you have to do is show them on the screen! Just call `self.startOnboarding()` and the onboarding will start.
+5. Once you set your onboarding items, all you have to do is show them on the screen! Just call `self.startOnboarding()` and the onboarding will start.
 
 # Customization
 You can customize color, font, timing, and where the onboarding items show through the `ABOnboardingSettings` struct.
