@@ -10,7 +10,8 @@ An easy to use library built for the first time user experience of your iOS app.
 - [Example](#example)
 - [Credits](#credits)
 
-#Screenshots
+# Screenshots
+
 ![Screenshot](https://raw.githubusercontent.com/MrAdamBoyd/ABOnboarding/master/screenshots/screenshot1.png)
 ![Screenshot](https://raw.githubusercontent.com/MrAdamBoyd/ABOnboarding/master/screenshots/screenshot2.png)
 
