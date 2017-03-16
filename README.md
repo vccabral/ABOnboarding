@@ -15,7 +15,7 @@ An easy to use library built for the first time user experience of your iOS app.
 ![Screenshot](https://raw.githubusercontent.com/MrAdamBoyd/ABOnboarding/master/screenshots/screenshot1.png)
 ![Screenshot](https://raw.githubusercontent.com/MrAdamBoyd/ABOnboarding/master/screenshots/screenshot2.png)
 
-#Usage
+# Usage
 ###1
 Make your view controller conform to `ShowsABOnboardingItem`
 
@@ -82,7 +82,7 @@ public enum RelativePlacement {
 ###5
 Once you set your onboarding items, all you have to do is show them on the screen! Just call `self.startOnboarding()` and the onboarding will start.
 
-#Customization
+# Customization
 You can customize color, font, timing, and where the onboarding items show through the `ABOnboardingSettings` struct.
 ```swift 
     //Background and text
@@ -106,7 +106,7 @@ You can customize color, font, timing, and where the onboarding items show throu
     public static var TouchesDisabledOnUncoveredRect: Bool = true
 ```
 
-#Installation
+# Installation
 
 If you are using [Cocoapods](https://cocoapods.org/), add the following line to your Podfile:
 
@@ -116,8 +116,8 @@ And in any of the classes that you want to show onboarding in, add this import s
 
 `import ABOnboarding`
 
-#Example
+# Example
 There is a short example app in this repo.
 
-#Credits
+# Credits
 `ABOnboarding` is brought to you by [Adam Boyd](http://adamjboyd.com/) and was originally built for use in [Treasure](http://www.treasureapp.com) and [Under 100](http://www.theunder100.com/).
