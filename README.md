@@ -16,8 +16,8 @@ An easy to use library built for the first time user experience of your iOS app.
 ![Screenshot](https://raw.githubusercontent.com/MrAdamBoyd/ABOnboarding/master/screenshots/screenshot2.png)
 
 # Usage
-1
-###
+###1
+
 Make your view controller conform to `ShowsABOnboardingItem`
 
 2
